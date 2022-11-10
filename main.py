@@ -39,13 +39,13 @@ wait(2)
 score_columns = driver.find_elements(By.CLASS_NAME, "score-column")
 vote_button = driver.find_element(By.CLASS_NAME, "vote-button")
 
-karma_level = driver.find_element(By.CLASS_NAME, "karma-label")
+karma_level = driver.find_element(By.CLASS_NAME, "karma-value")
 
 while (karma_level.text != "Max"):
     print(karma_level.text)
     vote()
     wait(1)
-    karma_level = driver.find_element(By.CLASS_NAME, "karma-label")
+    karma_level = driver.find_element(By.CLASS_NAME, "karma-value")
 
 driver.close()
 
