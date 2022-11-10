@@ -39,4 +39,35 @@ wait(2)
 score_columns = driver.find_elements(By.CLASS_NAME, "score-column")
 vote_button = driver.find_element(By.CLASS_NAME, "vote-button")
 
-vote()
+karma_level = driver.find_element(By.CLASS_NAME, "karma-label")
+
+while (karma_level.text != "Max"):
+    print(karma_level.text)
+    vote()
+    wait(1)
+    karma_level = driver.find_element(By.CLASS_NAME, "karma-label")
+
+
+
+# @@@@@@@@@@@@@@@@@@@@@ TESTING @@@@@@@@@@@@@@@@@@@@@@@@
+
+# while 1:
+#     time.sleep(round(randint(300,1000)/1000, 1))
+#     print(round(randint(300,1000)/1000, 1))
+#     print("ok")
+
+# driver.get("https://laravel.com/docs/9.x/installation")
+
+# divmain = driver.find_element(By.ID, "main-content")
+# h1 = divmain.find_element(By.TAG_NAME, "h1")
+
+# print(h1.text)
+
+# karma_gauge = driver.find_element(By.CSS_SELECTOR, "div.karma-bar")
+
+# @@@@@@@@@@@@@@@@@@@@@ END TESTING @@@@@@@@@@@@@@@@@@@@@
+
+# driver.close()
+
+
+
