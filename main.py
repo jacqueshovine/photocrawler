@@ -1,7 +1,11 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from random import randint
+import time
 import config
+
+def wait(seconds = round(randint(300,1000)/1000, 1)):
+    time.sleep(seconds)
 
 def login(mail, password):
     login_mail_input = driver.find_element(By.NAME, "email")
@@ -10,18 +14,29 @@ def login(mail, password):
 
     login_mail_input.send_keys(mail)
     login_password_input.send_keys(password)
-    login_submit.click()
+    login_submit.click()    
 
+def vote():
+    for col in score_columns:
+        score_buttons = col.find_elements(By.CLASS_NAME, "score-value")
+        score = str(randint(0,3)) # Python has no ===, must parse as a string for comparison
+        for b in score_buttons:
+            if b.text == score:
+                wait() # sleep between O.3 and 1 second
+                b.click()
+    wait()
+    vote_button.click()
 
 driver = webdriver.Firefox(executable_path=config.geckodriver_path)
 driver.get("https://www.photofeeler.com/vote/dating")
 
+wait(2)
+
 login(config.login, config.password)
 
-# karma_gauge = driver.find_element(By.CSS_SELECTOR, "div.karma-bar")
+wait(2)
 
+score_columns = driver.find_elements(By.CLASS_NAME, "score-column")
+vote_button = driver.find_element(By.CLASS_NAME, "vote-button")
 
-# driver.close()
-
-
-
+vote()
